@@ -19,6 +19,10 @@ if (!Number.isInteger(port) || port <= 0) {
 export const env = {
   port,
   mongoUri: getRequiredEnv('MONGODB_URI'),
+  clientUrl: process.env.CLIENT_URL ?? 'http://localhost:5173',
   nodeEnv: process.env.NODE_ENV ?? 'development',
   isProduction: process.env.NODE_ENV === 'production',
+
+    betterAuthSecret: getRequiredEnv('BETTER_AUTH_SECRET'),
+  betterAuthUrl: getRequiredEnv('BETTER_AUTH_URL'),
 } as const

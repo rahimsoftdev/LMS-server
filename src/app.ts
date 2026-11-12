@@ -10,6 +10,7 @@ import { errorHandler } from './middleware/error.middleware.js'
 import { notFound } from './middleware/notFound.middleware.js'
 import { courseRouter } from './routes/course.routes.js'
 import { lectureRouter } from './routes/lecture.routes.js'
+import { adminRouter } from './routes/admin.routes.js'
 
 export const app = express()
 
@@ -42,6 +43,7 @@ app.get('/api/health', (_req, res) => {
 
 app.use('/api/courses', courseRouter)
 app.use('/api/lectures', lectureRouter)
+app.use('/api/admin', adminRouter)
 
 app.use(notFound)
 app.use(errorHandler)

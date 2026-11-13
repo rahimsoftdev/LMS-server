@@ -1,3 +1,4 @@
+
 import 'dotenv/config'
 
 function getRequiredEnv(name: string): string {
@@ -7,7 +8,7 @@ function getRequiredEnv(name: string): string {
     throw new Error(`Missing required environment variable: ${name}`)
   }
 
-  return value
+  return value.trim()
 }
 
 const port = Number(process.env.PORT ?? 5000)
@@ -22,7 +23,7 @@ export const env = {
   clientUrl: process.env.CLIENT_URL ?? 'http://localhost:5173',
   nodeEnv: process.env.NODE_ENV ?? 'development',
   isProduction: process.env.NODE_ENV === 'production',
-
-    betterAuthSecret: getRequiredEnv('BETTER_AUTH_SECRET'),
-  betterAuthUrl: getRequiredEnv('BETTER_AUTH_URL'),
+  betterAuthSecret: getRequiredEnv('BETTER_AUTH_SECRET'),
+  betterAuthUrl:
+    process.env.BETTER_AUTH_URL ?? `http://localhost:${port}`,
 } as const

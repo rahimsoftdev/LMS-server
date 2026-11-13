@@ -15,7 +15,7 @@ export const requireAdmin = asyncHandler(
       throw new ApiError(401, 'Authentication required')
     }
 
-    if (session.user.role !== 'admin') {
+    if (session?.user?.role !== 'admin') {
       throw new ApiError(403, 'Admin access required')
     }
 

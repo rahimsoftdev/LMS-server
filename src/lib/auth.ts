@@ -6,7 +6,7 @@ import { env } from '../config/env.js'
 
 const mongoClient = new MongoClient(env.mongoUri)
 
-const db = mongoClient.db()
+const db = mongoClient.db('datapollex')
 
 export const auth = betterAuth({
   appName: 'LMS',
@@ -15,14 +15,17 @@ export const auth = betterAuth({
 
   secret: env.betterAuthSecret,
 
-  database: mongodbAdapter(db),
+  database: mongodbAdapter(db, {
+    client: mongoClient,
+  }),
 
   trustedOrigins: [env.clientUrl],
 
   emailAndPassword: {
     enabled: true,
   },
-    user: {
+
+  user: {
     additionalFields: {
       role: {
         type: 'string',
@@ -32,4 +35,14 @@ export const auth = betterAuth({
       },
     },
   },
+
+  advanced: {
+  useSecureCookies: true,
+
+  defaultCookieAttributes: {
+    sameSite: 'none',
+    secure: true,
+    httpOnly: true,
+  },
+},
 })
